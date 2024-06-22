@@ -1,0 +1,15 @@
+{
+    "name": "web-scraping-action",
+    "version": "1.0.0",
+    "description": "",
+    "main": "scrape.js",
+    "dependencies": {
+        "axios": "^0.21.4",
+        "cheerio": "^1.0.0-rc.10"
+    },
+    "scripts": {
+        "scrape": "node scrape.js"
+    },
+    "author": "",
+    "license": "ISC"
+}

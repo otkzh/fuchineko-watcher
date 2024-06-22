@@ -1,0 +1,35 @@
+name: Scrape and Update CSV
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 毎時0分に実行
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install axios cheerio
+
+    - name: Run scrape script
+      run: node scrape.js
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add data.csv
+        git commit -m 'Update data.csv'
+        git push
